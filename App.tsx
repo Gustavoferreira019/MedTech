@@ -11,6 +11,7 @@ import PatientScreen from './components/patientScreen'
 import ProScreen from './components/proScreen';
 import InitialPatient from './components/initialPatient';
 import { useEffect, useState } from 'react';
+import CalendarAg from './components/calendar';
 
 
 const Stack = createStackNavigator();
@@ -25,6 +26,7 @@ export default function App() {
         <Stack.Screen name="PacientScreen" component={PatientScreen}/>
         <Stack.Screen name="ProScreen" component={ProScreen}/>
         <Stack.Screen name="InitialPatient" component={InitialPatient}/>
+        <Stack.Screen name="CalendarAg" component={CalendarAg}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
