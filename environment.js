@@ -1,1 +1,1 @@
-exports.urlApi = "http://192.168.137.214:9500";
+exports.urlApi = "http://192.168.137.16:9500";

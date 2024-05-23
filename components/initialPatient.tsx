@@ -36,7 +36,7 @@ export default function InitialPatient() {
     }}>
       <View style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-evenly', alignItems: 'center', height: 100 }}>
         <Image source={require('../assets/img/UI.png')} />
-        <Text style={styles.title}>Bem vindo, {userSession.name}</Text>
+        <Text style={styles.title}>Bem vindo, Matheus Moura Silva</Text>
         <Image source={require('../assets/img/user-icon.png')} style={{ height: 50, width: 50 }} />
       </View>
 
