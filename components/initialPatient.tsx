@@ -1,12 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Image, Touchable } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { StackActions } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function InitialPatient() {
 
   const navigation = useNavigation();
+  const [userSession, setUserSession] = useState(null);
+
+  useEffect(() => {
+      // Função para carregar a sessão do usuário ao inicializar o componente
+      const loadUserSession = async () => {
+          try {
+              const sessionData = await AsyncStorage.getItem('userSession');
+              if (sessionData !== null) {
+                  setUserSession(JSON.parse(sessionData));
+              }
+          } catch (e) {
+              console.error('Erro ao carregar a sessão do usuário:', e);
+          }
+      };
+
+      loadUserSession();
+  }, []);
 
   const handleDoctor1=()=>{
     navigation.dispatch(StackActions.replace('CalendarAg'));
@@ -18,7 +36,7 @@ export default function InitialPatient() {
     }}>
       <View style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-evenly', alignItems: 'center', height: 100 }}>
         <Image source={require('../assets/img/UI.png')} />
-        <Text style={styles.title}>Bem vindo, usuário</Text>
+        <Text style={styles.title}>Bem vindo, {userSession.name}</Text>
         <Image source={require('../assets/img/user-icon.png')} style={{ height: 50, width: 50 }} />
       </View>
 
