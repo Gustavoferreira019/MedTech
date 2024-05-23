@@ -1,23 +1,31 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { Button, Input, Icon } from '@rneui/themed';
+import { useNavigation } from '@react-navigation/native';
+import { StackActions } from '@react-navigation/native';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
-interface Props {
-      clickPreviousPro: () => void;
-}
 
 
-export default function ProScreen(props:Props) {
+export default function ProScreen() {
+
+      const navigation = useNavigation();
+
+      const handleArrowBack = () => {
+            navigation.dispatch(StackActions.replace('Presentation'));
+      }
       return (
             <View style={styles.container}>
 
-                  <Icon
-                        name='arrow-left'
-                        type='font-awesome'
-                        containerStyle={{ marginRight: 340, marginBottom: 30 }}
-                        onPress={props.clickPreviousPro}
-                        iconStyle={{ color: 'rgba(255, 255, 255, 1)' }}
-                  />
+                  <View style={{
+                        height: 35, width: 35, display: 'flex', alignItems: 'center',
+                        position: 'absolute', top: 50, left: 30,
+                  }}>
+                        <TouchableOpacity onPress={handleArrowBack}>
+                              <FontAwesomeIcon icon={faArrowLeft} size={30} color="rgba(0, 255, 255, 0.82)" />
+                        </TouchableOpacity>
+                  </View>
                   <Image
                         source={require('../assets/img/techmed-icon.png')} />
 
@@ -28,14 +36,14 @@ export default function ProScreen(props:Props) {
                   </View>
 
                   <View style={{ width: '88%' }}>
-                        <Text style={{ marginLeft: 10, fontWeight: '600',color:'rgba(255, 255, 255, 1)' }}>E-mail</Text>
+                        <Text style={{ marginLeft: 10, fontWeight: '600', color: 'rgba(255, 255, 255, 1)' }}>E-mail</Text>
                         <Input
                               placeholder='exemplo@123.com'
                         />
-                        <Text style={{ marginLeft: 10, fontWeight: '600',color:'rgba(255, 255, 255, 1)' }}>Senha</Text>
+                        <Text style={{ marginLeft: 10, fontWeight: '600', color: 'rgba(255, 255, 255, 1)' }}>Senha</Text>
                         <Input placeholder="Digite pelo menos 6 caracteres" secureTextEntry={true} />
 
-                        <Text style={{ fontWeight: '500', color:'rgba(0, 199, 199, 1)', textAlign: 'right' }}>Esqueci minha senha</Text>
+                        <Text style={{ fontWeight: '500', color: 'rgba(0, 199, 199, 1)', textAlign: 'right' }}>Esqueci minha senha</Text>
                   </View>
 
                   <Button
@@ -63,7 +71,7 @@ export default function ProScreen(props:Props) {
                   </TouchableOpacity>
 
                   <TouchableOpacity>
-                        <View style={{backgroundColor:'rgba(0, 99, 199, 1)', width: 340, height: 60, display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: 20, marginTop: 30 ,paddingTop:15,paddingBottom:15,borderRadius:10}}>
+                        <View style={{ backgroundColor: 'rgba(0, 99, 199, 1)', width: 340, height: 60, display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: 20, marginTop: 30, paddingTop: 15, paddingBottom: 15, borderRadius: 10 }}>
                               <Image source={require('../assets/img/google.png')}
                                     style={{
                                           width: 35,
@@ -97,5 +105,5 @@ const styles = StyleSheet.create({
             fontWeight: '900',
             fontSize: 40,
             marginTop: -15,
-      }
+      },
 });

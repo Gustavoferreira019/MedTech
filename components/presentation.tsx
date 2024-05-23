@@ -1,13 +1,21 @@
 import { View, Text, Image, StyleSheet } from 'react-native';
 import React from 'react';
 import { Button } from '@rneui/themed';
+import { useEffect } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { StackActions } from '@react-navigation/native';
 
-interface Props {
-      clickPaciente: () => void;
-      clickPro: () => void;
-}
+export default function Presentation() {
 
-export default function Presentation(props: Props) {
+      const navigation = useNavigation();
+
+      const handlePacientePress = () =>{
+            navigation.dispatch(StackActions.replace('PacientScreen'));
+      }
+
+      const handleProScPress = ()=>{
+            navigation.dispatch(StackActions.replace('ProScreen'))
+      }
       return (
             <View style={styles.container}>
                   <Image
@@ -19,7 +27,7 @@ export default function Presentation(props: Props) {
                         <Text style={styles.stext}>Saúde</Text>
                   </View>
 
-                  <View style={{marginTop:100}}>
+                  <View style={{ marginTop: 100 }}>
                         <Button
                               title="Sou Profissional de Saúde"
                               buttonStyle={{
@@ -32,7 +40,7 @@ export default function Presentation(props: Props) {
                                     marginHorizontal: 50,
                                     marginVertical: 20,
                               }}
-                              onPress={props.clickPro}
+                              onPress={handleProScPress}
                         />
                         <Button
                               title="Sou Paciente"
@@ -48,7 +56,8 @@ export default function Presentation(props: Props) {
                                     marginHorizontal: 50,
                                     marginVertical: 0,
                               }}
-                              onPress={props.clickPaciente}
+                              onPress={handlePacientePress}
+
                         />
                   </View>
             </View>

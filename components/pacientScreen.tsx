@@ -1,20 +1,29 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import React from 'react';
-import { Button, Input,Icon } from '@rneui/themed';
+import { Button, Input, Icon } from '@rneui/themed';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { useNavigation } from '@react-navigation/native';
+import { StackActions } from '@react-navigation/native';
 
-interface Props {
-      clickPreviousPacient: () => void;
-}
+export default function PacientScreen() {
 
-export default function PacientScreen(props:Props) {
+      const navigation = useNavigation();
+
+      const handleArrowBack = () => {
+            navigation.dispatch(StackActions.replace('Presentation'));
+      }
+
       return (
             <View style={styles.container}>
-                  <Icon
-                        name='arrow-left'
-                        type='font-awesome'
-                        containerStyle={{ marginRight: 340,marginBottom:30 }}
-                        onPress={props.clickPreviousPacient}
-                  />
+                  <View style={{
+                        height: 35, width: 35, display: 'flex', alignItems: 'center',
+                        position: 'absolute', top: 50, left: 30,
+                  }}>
+                        <TouchableOpacity onPress={handleArrowBack}>
+                              <FontAwesomeIcon icon={faArrowLeft} size={30} color="rgba(0, 255, 255, 0.82)" />
+                        </TouchableOpacity>
+                  </View>
                   <Image
                         source={require('../assets/img/techmed-icon.png')} />
 
