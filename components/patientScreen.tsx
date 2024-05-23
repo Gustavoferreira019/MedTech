@@ -1,21 +1,35 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Input, Icon } from '@rneui/themed';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { useNavigation } from '@react-navigation/native';
 import { StackActions } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import patientService from '../src/service/patientService';
 
 export default function PacientScreen() {
 
       const navigation = useNavigation();
+      const [email, setEmail] = useState('');
+      const [senha, setSenha] = useState('');
 
       const handleArrowBack = () => {
             navigation.dispatch(StackActions.replace('Presentation'));
       }
 
-      const handleLogin = ()=>{
-            navigation.dispatch(StackActions.replace('InitialPatient'));
+      const handleLogin = async () => {
+            const loginForm = {
+                  email: email,
+                  password: senha
+            }
+
+            const session = await patientService.authenticate(loginForm);
+
+            if(session.status == 200) {
+                  await AsyncStorage.setItem("userSession", JSON.stringify(session.data));
+                  navigation.dispatch(StackActions.replace('InitialPatient'));
+            }
       }
 
       return (
@@ -41,9 +55,16 @@ export default function PacientScreen() {
                         <Text style={{ marginLeft: 10, fontWeight: '600' }}>E-mail</Text>
                         <Input
                               placeholder='exemplo@123.com'
+                              value={email}
+                              onChangeText={setEmail}
                         />
                         <Text style={{ marginLeft: 10, fontWeight: '600' }}>Senha</Text>
-                        <Input placeholder="Digite pelo menos 6 caracteres" secureTextEntry={true} />
+                        <Input
+                              placeholder="Digite pelo menos 6 caracteres"
+                              secureTextEntry={true}
+                              value={senha}
+                              onChangeText={setSenha}
+                        />
 
                         <Text style={{ fontWeight: '500', color: 'rgba(0, 61, 122, 1)', textAlign: 'right' }}>Esqueci minha senha</Text>
                   </View>
