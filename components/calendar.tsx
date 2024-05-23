@@ -37,6 +37,10 @@ export default function CalendarAg() {
         });
     };
 
+    const handleMark=()=>{
+        navigation.dispatch(StackActions.replace('Confirm'));
+    }
+
     LocaleConfig.locales['br'] = {
         monthNames: [
             'Janeiro',
@@ -249,6 +253,7 @@ export default function CalendarAg() {
                         marginHorizontal: 30,
                         marginVertical: 15,
                     }}
+                    onPress={handleMark}
                 />
             </View>
         </View>

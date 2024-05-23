@@ -12,6 +12,7 @@ import ProScreen from './components/proScreen';
 import InitialPatient from './components/initialPatient';
 import { useEffect, useState } from 'react';
 import CalendarAg from './components/calendar';
+import Confirm from './components/confirm'
 
 
 const Stack = createStackNavigator();
@@ -27,6 +28,7 @@ export default function App() {
         <Stack.Screen name="ProScreen" component={ProScreen}/>
         <Stack.Screen name="InitialPatient" component={InitialPatient}/>
         <Stack.Screen name="CalendarAg" component={CalendarAg}/>
+        <Stack.Screen name="Confirm" component={Confirm}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
