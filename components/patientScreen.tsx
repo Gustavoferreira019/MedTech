@@ -14,6 +14,10 @@ export default function PacientScreen() {
             navigation.dispatch(StackActions.replace('Presentation'));
       }
 
+      const handleLogin = ()=>{
+            navigation.dispatch(StackActions.replace('InitialPatient'));
+      }
+
       return (
             <View style={styles.container}>
                   <View style={{
@@ -56,6 +60,7 @@ export default function PacientScreen() {
                               marginHorizontal: 50,
                               marginVertical: 20,
                         }}
+                        onPress={handleLogin}
                   />
                   <TouchableOpacity>
                         <Button title="Quero me cadastrar"
